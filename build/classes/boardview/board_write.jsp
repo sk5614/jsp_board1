@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page import="board.BoardDTO, board.BoardDAO, board.MyBatisConfig" %>
+
 <%
+		request.setCharacterEncoding("UTF-8");
     if (request.getMethod().equalsIgnoreCase("POST")) {
         String bTitle = request.getParameter("bTitle");
         String bContent = request.getParameter("bContent");
@@ -14,16 +16,17 @@
         BoardDAO boardDAO = new BoardDAO(MyBatisConfig.getSqlSessionFactory());
         boardDAO.writeBoard(board);
 
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("board_list.jsp");
     }
 %>
 <html>
 <head>
+<meta charset="UTF-8">
     <title>글쓰기</title>
 </head>
 <body>
 <h1>글쓰기</h1>
-<form action="write.jsp" method="post">
+<form action="board_write.jsp" method="post">
     <label>제목: <input type="text" name="bTitle"/></label><br/>
     <label>내용: <textarea name="bContent"></textarea></label><br/>
  <!--    <label>작성자: <input type="text" name="writer"/></label><br/> -->

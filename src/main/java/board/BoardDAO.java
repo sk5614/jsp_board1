@@ -4,7 +4,9 @@ package board;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BoardDAO {
     private SqlSessionFactory sqlSessionFactory;
@@ -13,12 +15,24 @@ public class BoardDAO {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-    public List<BoardDTO> boardList() {
+    public List<BoardDTO> boardList(int page, int size) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            return session.selectList("board.BoardDAO.boardList");
+            Map<String, Integer> params = new HashMap<>();
+            
+            int offset=(page-1)*size;
+            params.put("offset", size);
+            params.put("limit", offset);
+            return session.selectList("board.BoardDAO.boardList",params); 
         }
     }
-
+    
+    public int countBoard() {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            return session.selectOne("board.BoardDAO.countBoard");
+        }
+    }
+    
+    
     public BoardDTO boardInfo(int id) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             return session.selectOne("board.BoardDAO.boardInfo", id);
@@ -32,4 +46,20 @@ public class BoardDAO {
             session.commit();
         }
     }
+    
+    public void deleteBoard(BoardDTO board) {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            session.delete("board.BoardDAO.deleteBoard", board);
+            session.commit();
+        }
+    }
+    
+    public void editBoard(BoardDTO board) {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            session.update("board.BoardDAO.editBoard", board);
+            session.commit();
+        }
+    }
+    
+    
 }

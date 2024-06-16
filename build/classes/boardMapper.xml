@@ -15,13 +15,21 @@
     <select id="boardList" resultMap="BoardResultMap">
         SELECT * 
         FROM board 
-        ORDER BY b_date DESC;
+        ORDER BY b_date DESC
+        LIMIT #{limit} OFFSET #{offset}
     </select>
+    
+    <select id="countBoard" resultType="int">
+        SELECT COUNT(*) 
+        FROM board
+    </select>
+    
     <select id="boardInfo" parameterType="int" resultMap="BoardResultMap">
         SELECT * 
         FROM board 
         WHERE b_id = #{bId};
     </select>
+    
     <insert id="writeBoard" parameterType="board.BoardDTO">
         INSERT INTO board (b_title, b_content, b_date)
         VALUES (#{bTitle}, #{bContent}, NOW() );
@@ -31,5 +39,18 @@
     	UPDATE board
     	SET b_group=LAST_INSERT_ID()
     	WHERE b_id=LAST_INSERT_ID()
+    </update>
+    
+    <delete id="deleteBoard" parameterType="board.BoardDTO">
+    	DELETE 
+    	FROM board
+    	WHERE b_id=#{bId}
+    </delete>
+    
+        <update id="editBoard" parameterType="board.BoardDTO">
+    	UPDATE board
+    	SET b_title=#{bTitle},
+    		b_content=#{bContent}
+    	WHERE b_id=#{bId}	
     </update>
 </mapper>
