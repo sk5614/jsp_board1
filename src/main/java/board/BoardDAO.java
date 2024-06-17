@@ -1,6 +1,6 @@
 package board;
 
-//import board.BoardDTO;
+import board.BoardDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -15,13 +15,12 @@ public class BoardDAO {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-    public List<BoardDTO> boardList(int page, int size) {
+    public List<BoardDTO> boardList(int offset, int limit) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             Map<String, Integer> params = new HashMap<>();
             
-            int offset=(page-1)*size;
-            params.put("offset", size);
-            params.put("limit", offset);
+            params.put("offset", offset);
+            params.put("limit", limit);
             return session.selectList("board.BoardDAO.boardList",params); 
         }
     }
@@ -42,6 +41,7 @@ public class BoardDAO {
     public void writeBoard(BoardDTO board) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             session.insert("board.BoardDAO.writeBoard", board);
+            session.commit();
             session.update("board.BoardDAO.setGroup");
             session.commit();
         }
@@ -60,6 +60,13 @@ public class BoardDAO {
             session.commit();
         }
     }
-    
+    public void replyBoard(BoardDTO board) {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            session.insert("board.BoardDAO.replyBoard", board);
+            session.commit();
+            session.update("board.BoardDAO.setReply", board);
+            session.commit();
+        }
+    }
     
 }

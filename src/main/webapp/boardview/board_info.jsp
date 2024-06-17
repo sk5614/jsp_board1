@@ -24,6 +24,7 @@
 			<a href="board_list.jsp">목록으로</a>
 			<a href="board_delete.jsp?bId=<%= board.getbId() %>">삭제</a>
 			<a href="board_edit.jsp?bId=<%= board.getbId() %>">수정</a>
+			<a href="board_reply.jsp?bId=<%= board.getbId() %>">답글</a>
 	</div>
 </body>
 </html>

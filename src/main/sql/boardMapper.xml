@@ -37,8 +37,8 @@
     
     <update id="setGroup">
     	UPDATE board
-    	SET b_group=LAST_INSERT_ID()
-    	WHERE b_id=LAST_INSERT_ID()
+    	SET b_group = LAST_INSERT_ID()
+    	WHERE b_id = LAST_INSERT_ID()
     </update>
     
     <delete id="deleteBoard" parameterType="board.BoardDTO">
@@ -47,10 +47,23 @@
     	WHERE b_id=#{bId}
     </delete>
     
-        <update id="editBoard" parameterType="board.BoardDTO">
+     <update id="editBoard" parameterType="board.BoardDTO">
     	UPDATE board
     	SET b_title=#{bTitle},
     		b_content=#{bContent}
     	WHERE b_id=#{bId}	
     </update>
+    
+    
+    <insert id="replyBoard" parameterType="board.BoardDTO">
+    	INSERT INTO board (b_title, b_content, b_date, b_group, b_order, b_depth)
+    	VALUES (#{bTitle},#{bContent}, NOW(), #{bGroup}, #{bOrder}+1, #{bDepth}+1)
+    </insert>
+	
+	<update id="setReply" parameterType="board.BoardDTO">
+		UPDATE board 
+		SET b_order=b_order+1 
+		WHERE b_group=#{bGroup} and b_order>#{bOrder} and b_id!=LAST_INSERT_ID() 
+	</update>
+	
 </mapper>

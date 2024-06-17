@@ -5,32 +5,26 @@
 <%@ page import="java.util.ArrayList" %> 
 <%@ page import="board.BoardDTO, board.BoardDAO, board.MyBatisConfig" %>
 
-<%
-    int size = 10; // 페이지당 표시할 게시글 수
-    int pag = 1; // 현재 페이지 기본값
-    String pageParam = request.getParameter("page");
-    if (pageParam != null && !pageParam.isEmpty()) {
-        pag = Integer.parseInt(pageParam); // 요청한 페이지 번호
-    }else{pag=1;
-    }
-    
-    
-    // BoardDAO를 사용하여 게시글 목록 조회
-    BoardDAO boardDAO = new BoardDAO(MyBatisConfig.getSqlSessionFactory());
-    List<BoardDTO> boardList = boardDAO.boardList(pag, size);
-    
-    // 전체 게시글 수 조회
-    int totalBoards = boardDAO.countBoard();
-    int totalPages = (int) Math.ceil((double) totalBoards / size);
 
-    // 페이지네이션을 위한 시작 페이지와 끝 페이지 계산
-    int startPage = Math.max(1, pag - 4);
-    int endPage = Math.min(startPage + 5, totalPages);
-    int nowPage = pag;
-    List<Integer> pageNumbers = new ArrayList<>();
-    for (int i = startPage; i <= endPage; i++) {
-        pageNumbers.add(i);
-    }
+
+<%
+		int pag = 1;
+		int limit = 10;
+		if (request.getParameter("page") != null) {
+		    pag = Integer.parseInt(request.getParameter("page"));
+		}
+		int offset = (pag - 1) * limit;
+		
+		BoardDAO boardDAO = new BoardDAO(MyBatisConfig.getSqlSessionFactory());
+		List<BoardDTO> boardList = boardDAO.boardList(offset, limit);
+		int totalBoards = boardDAO.countBoard();
+		int totalPages = (int) Math.ceil((double) totalBoards / limit);
+		
+        // 페이지네이션 범위 계산
+        int paginationSize = 5; // 페이지네이션에 표시할 페이지 수
+        int currentBlock = (int) Math.ceil((double) pag / paginationSize);
+        int startPage = (currentBlock - 1) * paginationSize + 1;
+        int endPage = Math.min(startPage + paginationSize - 1, totalPages);
 %>
 <!DOCTYPE html>
 <html>
@@ -40,6 +34,13 @@
     <title>게시판</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+        <style>
+        .re-tag {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-3">
@@ -64,45 +65,34 @@
                 <% for (BoardDTO board : boardList) { %>
                     <tr>
                         <td><%= board.getbId() %></td>
-                        <td><a href="board_info.jsp?bId=<%= board.getbId() %>"><%= board.getbTitle() %></a></td>
+                        <td>
+                            <% if (board.getbDepth() > 1) { %>
+                               <span class="re-tag">RE:</span>  
+                            <% } %>
+                        <a href="board_info.jsp?bId=<%= board.getbId() %>"><%= board.getbTitle() %></a></td>
                         <td style="font-size: 0.8em;"><%= board.getbDate() %></td>
                     </tr>
                 <% } %>
             </tbody>
         </table>
 
-        <nav aria-label="Page navigation">
+       <nav aria-label="Page navigation">
             <ul class="pagination">
-                <c:if test="${startPage > 1}">
+                <% if (startPage > 1) { %>
                     <li class="page-item">
-                        <a class="page-link" href="board_list.jsp?page=${startPage - 1}&size=${size}" aria-label="Previous">
-                            &laquo; Previous
-                        </a>
+                        <a class="page-link" href="board_list.jsp?page=<%= startPage - 1 %>">&laquo; Previous</a>
                     </li>
-                </c:if>
-                <c:forEach var="pageNum" items="${pageNumbers}">
+                <% } %>
+                <% for (int i = startPage; i <= endPage; i++) { %>
+                    <li class="page-item <%= (i == pag) ? "active" : "" %>">
+                        <a class="page-link" href="board_list.jsp?page=<%= i %>"><%= i %></a>
+                    </li>
+                <% } %>
+                <% if (endPage < totalPages) { %>
                     <li class="page-item">
-                        <c:choose>
-                            <c:when test="${pageNum == nowPage}">
-                                <a class="page-link active" href="board_list.jsp?page=${pageNum}&size=${size}">
-                                    <strong>${pageNum}</strong>
-                                </a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="page-link" href="board_list.jsp?page=${pageNum}&size=${size}">
-                                    ${pageNum}
-                                </a>
-                            </c:otherwise>
-                        </c:choose>
+                        <a class="page-link" href="board_list.jsp?page=<%= endPage + 1 %>">Next &raquo;</a>
                     </li>
-                </c:forEach>
-                <c:if test="${endPage < totalPages}">
-                    <li class="page-item">
-                        <a class="page-link" href="board_list.jsp?page=${endPage + 1}&size=${size}" aria-label="Next">
-                            Next &raquo;
-                        </a>
-                    </li>
-                </c:if>
+                <% } %>
             </ul>
         </nav>
     </div>
