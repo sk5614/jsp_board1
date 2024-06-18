@@ -66,7 +66,7 @@
                     <tr>
                         <td><%= board.getbId() %></td>
                         <td>
-                            <% if (board.getbDepth() > 1) { %>
+                            <% if (board.getbDepth() > 0) { %>
                                <span class="re-tag">RE:</span>  
                             <% } %>
                         <a href="board_info.jsp?bId=<%= board.getbId() %>"><%= board.getbTitle() %></a></td>

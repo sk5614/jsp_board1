@@ -15,7 +15,7 @@
     <select id="boardList" resultMap="BoardResultMap">
         SELECT * 
         FROM board 
-        ORDER BY b_date DESC
+        ORDER BY b_group DESC, b_order ASC, b_depth ASC
         LIMIT #{limit} OFFSET #{offset}
     </select>
     
@@ -59,11 +59,12 @@
     	INSERT INTO board (b_title, b_content, b_date, b_group, b_order, b_depth)
     	VALUES (#{bTitle},#{bContent}, NOW(), #{bGroup}, #{bOrder}+1, #{bDepth}+1)
     </insert>
-	
+    
 	<update id="setReply" parameterType="board.BoardDTO">
 		UPDATE board 
 		SET b_order=b_order+1 
 		WHERE b_group=#{bGroup} and b_order>#{bOrder} and b_id!=LAST_INSERT_ID() 
 	</update>
+	
 	
 </mapper>
