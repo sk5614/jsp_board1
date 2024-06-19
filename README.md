@@ -33,4 +33,9 @@ JSP Model1 기반 게시판입니다
 - 영화관 선택(대분류/소분류 선택) 및 시간 선택
 - 좌석 선택
 - 결제 페이지
-
+<details>
+	<summary>sql</summary>
+    
+   dd
+   
+</details>
