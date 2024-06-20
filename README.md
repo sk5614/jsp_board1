@@ -17,9 +17,11 @@ JSP Model1 기반 게시판입니다
 - **Server** : tomcat
 
 ## 프로젝트 구조 
-![image]<img src="./model1.png", height="100x", width="100px">
-![image]<img src="./image.png", height="100x", width="100px">
+![image](https://github.com/sk5614/jsp_board1/assets/169679888/75fa422b-8c84-49ce-9177-00f848b3efc4)
+![image](https://github.com/sk5614/jsp_board1/assets/169679888/50453faf-8544-4afc-b6be-86c8c19a50f7)
 
+
+## DB 구조 
 ![image](https://github.com/sk5614/jsp_board1/assets/169679888/0bd53f5f-dc1c-4be4-9e8a-f26cd6f053f6)
 
 #### 작성
