@@ -17,6 +17,7 @@ JSP Model1 기반 게시판입니다
 - **Server** : tomcat
 
 ## 프로젝트 구조 
+![poster](./model1.png)
 ![poster](./image.png)
 
 
