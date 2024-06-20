@@ -20,6 +20,7 @@ JSP Model1 기반 게시판입니다
 !<img src="./model1.png", height="100x", width="100px">
 !<img src="./image.png", height="100x", width="100px">
 
+![image](https://github.com/sk5614/jsp_board1/assets/169679888/0bd53f5f-dc1c-4be4-9e8a-f26cd6f053f6)
 
 #### 작성
 <details>
