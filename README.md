@@ -77,7 +77,7 @@ JSP Model1 게시판입니다
    
 </details>
 
-
+</details>
 
 
 #### 개선점 
