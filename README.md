@@ -19,7 +19,7 @@ JSP Model1 기반 게시판입니다
 ## 프로젝트 구조 
 ![image](https://github.com/sk5614/jsp_board1/assets/169679888/75fa422b-8c84-49ce-9177-00f848b3efc4)
 ![image](https://github.com/sk5614/jsp_board1/assets/169679888/50453faf-8544-4afc-b6be-86c8c19a50f7){: width="50" height="50"}
-<img src="https://github.com/sk5614/jsp_board1/assets/169679888/50453faf-8544-4afc-b6be-86c8c19a50f7" width="200" height="400"/>
+<img src="https://github.com/sk5614/jsp_board1/assets/169679888/50453faf-8544-4afc-b6be-86c8c19a50f7" width="100" height="100"/>
 
 
 ## DB 구조 
