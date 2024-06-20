@@ -25,6 +25,7 @@ JSP Model1 기반 게시판입니다
 ![image](https://github.com/sk5614/jsp_board1/assets/169679888/0bd53f5f-dc1c-4be4-9e8a-f26cd6f053f6)
 
 #### 작성
+![write](https://github.com/sk5614/jsp_board1/assets/169679888/6b2b9af0-adec-47e7-9343-aff097ed0b79)
 <details>
 	<summary>SQL 쿼리문 </summary>
     
@@ -35,6 +36,7 @@ JSP Model1 기반 게시판입니다
 
 - 
 #### 삭제 - 
+![delete](https://github.com/sk5614/jsp_board1/assets/169679888/e47684b7-79ff-45ec-a227-8be32f7c6b1a)
 <details>
 	<summary>SQL 쿼리문 </summary>
     	DELETE 
@@ -45,6 +47,7 @@ JSP Model1 기반 게시판입니다
 
 - 
 #### 수정 - 
+![edit](https://github.com/sk5614/jsp_board1/assets/169679888/51c6af24-7a0d-4b22-bb7f-0a8eb5bb9635)
 -<details>
 	<summary>SQL 쿼리문 </summary>
     
@@ -56,6 +59,7 @@ JSP Model1 기반 게시판입니다
 
 
 #### 답글 - 
+![reply](https://github.com/sk5614/jsp_board1/assets/169679888/9ab6de7b-1021-4412-a03f-39cbcd63aa5d)
 
 <details>
 	<summary>SQL 쿼리문 </summary>
