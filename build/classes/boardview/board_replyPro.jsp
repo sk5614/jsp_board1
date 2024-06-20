@@ -10,7 +10,7 @@
         String order = request.getParameter("bOrder");
         String depth = request.getParameter("bDepth");
 
-        if (bId != null && !bId.trim().isEmpty() && title != null && !title.trim().isEmpty() && content != null && !content.trim().isEmpty()) {
+        if (bId != null && !bId.trim().isEmpty() && title != null && !title.trim().isEmpty()) {
             BoardDTO board = new BoardDTO();
             board.setbId(Integer.parseInt(bId));
             board.setbTitle(title);
