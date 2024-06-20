@@ -17,8 +17,8 @@ JSP Model1 기반 게시판입니다
 - **Server** : tomcat
 
 ## 프로젝트 구조 
-<img src="./model1.png", height="100x", width="100px">
-<img src="./image.png", height="100x", width="100px">
+!<img src="./model1.png", height="100x", width="100px">
+!<img src="./image.png", height="100x", width="100px">
 
 
 #### 작성
